@@ -19,7 +19,7 @@ import traci
 
 logger = Logger()
 
-def view_with_gui(mode='rl', duration_seconds=300):
+def view_with_gui(mode='rl', duration_seconds=30000):
     """
     Open SUMO GUI and run simulation
     
@@ -164,7 +164,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="View traffic simulation in SUMO GUI")
     parser.add_argument('--mode', type=str, choices=['rl', 'baseline'], default='baseline',
                         help='Simulation mode: rl (trained agents) or baseline (fixed signals)')
-    parser.add_argument('--duration', type=int, default=300,
+    parser.add_argument('--duration', type=int, default=30000,
                         help='Simulation duration in seconds (default: 300 = 5 minutes)')
     
     args = parser.parse_args()
