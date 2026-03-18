@@ -201,7 +201,7 @@ def train(
                     f"Episode {episode}/{max_episodes} | "
                     f"Reward: {total_reward:.1f} | "
                     f"Avg: {avg_reward:.1f} | "
-                    f"ε: {epsilon:.3f} | "
+                    f"eps: {epsilon:.3f} | "
                     f"Steps: {step+1} | "
                     f"Time: {logger.format_time(elapsed_time)}"
                 )
