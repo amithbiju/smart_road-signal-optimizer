@@ -15,7 +15,7 @@ from sumo.sumo_env import SUMOEnvironment
 from rl.dqn_agent import DQNAgent
 
 
-def evaluate_baseline(num_episodes=5, max_steps=3600):
+def evaluate_baseline(num_episodes=5, max_steps=3600, use_gui=False):
     """
     Evaluate baseline fixed-time traffic signals
     
@@ -34,7 +34,7 @@ def evaluate_baseline(num_episodes=5, max_steps=3600):
     env = SUMOEnvironment(
         network_file=config.NETWORK_FILE,
         route_file=config.ROUTE_FILE,
-        use_gui=False,
+        use_gui=use_gui,
         step_length=config.SUMO_STEP_LENGTH,
         min_green_time=config.MIN_GREEN_TIME,
         yellow_time=config.YELLOW_TIME,
@@ -125,7 +125,7 @@ def evaluate_baseline(num_episodes=5, max_steps=3600):
     return results
 
 
-def evaluate_rl(num_episodes=5, max_steps=3600):
+def evaluate_rl(num_episodes=5, max_steps=3600, use_gui=False):
     """
     Evaluate RL-trained traffic signals
     
@@ -144,7 +144,7 @@ def evaluate_rl(num_episodes=5, max_steps=3600):
     env = SUMOEnvironment(
         network_file=config.NETWORK_FILE,
         route_file=config.ROUTE_FILE,
-        use_gui=False,
+        use_gui=use_gui,
         step_length=config.SUMO_STEP_LENGTH,
         min_green_time=config.MIN_GREEN_TIME,
         yellow_time=config.YELLOW_TIME,
@@ -357,6 +357,7 @@ if __name__ == "__main__":
                         help='Evaluation mode')
     parser.add_argument('--episodes', type=int, default=5, help='Number of evaluation episodes')
     parser.add_argument('--steps', type=int, default=3600, help='Maximum steps per episode')
+    parser.add_argument('--gui', action='store_true', help='Use SUMO GUI')
     
     args = parser.parse_args()
     
@@ -375,10 +376,10 @@ if __name__ == "__main__":
     rl_results = None
     
     if args.mode in ['baseline', 'both']:
-        baseline_results = evaluate_baseline(args.episodes, args.steps)
+        baseline_results = evaluate_baseline(args.episodes, args.steps, args.gui)
     
     if args.mode in ['rl', 'both']:
-        rl_results = evaluate_rl(args.episodes, args.steps)
+        rl_results = evaluate_rl(args.episodes, args.steps, args.gui)
     
     # Compare results
     if baseline_results and rl_results:

@@ -144,7 +144,7 @@ def run_simulation(project_id):
     env['PYTHONUNBUFFERED'] = '1'
     
     # Run evaluate.py
-    cmd = f'"{sys.executable}" evaluate.py --mode rl'
+    cmd = f'"{sys.executable}" evaluate.py --mode rl --gui'
     threading.Thread(target=run_background_process, args=(cmd, env, project_id)).start()
     
     return jsonify({"status": "Simulation run started", "project_id": project_id, "message": "View live logs at /logs/" + project_id})
